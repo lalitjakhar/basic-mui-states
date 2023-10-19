@@ -2,12 +2,15 @@ import { Box, Button, Container, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { Typography } from "@mui/material";
+import CreateIcon from "@mui/icons-material/Create";
+import CheckIcon from "@mui/icons-material/Check";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Home = () => {
-  const [inputValue, setInputValue] = useState(""); // Moved the state initialization here
+  const [inputValue, setInputValue] = useState("");
 
   const handleAddButtonClick = () => {
-    console.log("Data:", inputValue);
+    console.log(inputValue);
   };
 
   return (
@@ -43,12 +46,23 @@ const Home = () => {
             >
               To Do
             </Typography>
-            <Box sx={{ padding: "1rem", display: "flex", gap: 2 }}>
-              <TextField
-                fullWidth
-                placeholder="Add Text"
-                variant="outlined"
-              ></TextField>
+            <Box
+              sx={{
+                padding: "1rem",
+                border: "1px solid grey",
+                gap: 2,
+              }}
+            >
+              <Grid container spacing={2}>
+                <Grid item xs={10} sx={{ display: "flex" }}>
+                  <CreateIcon sx={{ color: "blueviolet" }} />
+                  <Typography>fgsdhfgsdhf hs</Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <CheckIcon sx={{ color: "green" }} />
+                  <DeleteIcon sx={{ color: "red" }} />
+                </Grid>
+              </Grid>
             </Box>
           </Grid>
           <Grid item xs={6}>
@@ -58,12 +72,21 @@ const Home = () => {
             >
               Completed
             </Typography>
-            <Box sx={{ padding: "1rem", display: "flex", gap: 2 }}>
-              <TextField
-                fullWidth
-                placeholder="Add Text"
-                variant="outlined"
-              ></TextField>
+            <Box
+              sx={{
+                padding: "1rem",
+                border: "1px solid grey",
+                gap: 2,
+              }}
+            >
+              <Grid container spacing={2} justifyContent="space-between">
+                <Grid item>
+                  <Typography>fhfusdhfishg</Typography>
+                </Grid>
+                <Grid item xs={1}>
+                  <DeleteIcon sx={{ color: "red" }} />
+                </Grid>
+              </Grid>
             </Box>
           </Grid>
         </Grid>
