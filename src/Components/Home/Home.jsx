@@ -1,18 +1,22 @@
-import { Box, Button, Container, Grid, TextField } from "@mui/material";
+import { Box, Button, Container, Grid, Modal, TextField } from "@mui/material";
 import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { Typography } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditTodo from "../Modal/editTodo";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
+  const [todoData, setTodoData] = useState("");
+  const [open, setOpen] = useState(false);
+
+
 
   const handleAddButtonClick = () => {
-    console.log(inputValue);
+    setTodoData(inputValue);
   };
-
   return (
     <>
       <Container>
@@ -54,11 +58,17 @@ const Home = () => {
               }}
             >
               <Grid container spacing={2}>
-                <Grid item xs={10} sx={{ display: "flex" }}>
-                  <CreateIcon sx={{ color: "blueviolet" }} />
-                  <Typography>fgsdhfgsdhf hs</Typography>
+                <Grid item xs={1} sx={{ display: "flex" }}>
+                  <CreateIcon sx={{ color: "blueviolet" }} onClick={()=>setOpen(true)} />
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={9}>
+                  <Typography>{todoData}</Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={2}
+                  sx={{ display: "flex", justifyContent: "space-between" }}
+                >
                   <CheckIcon sx={{ color: "green" }} />
                   <DeleteIcon sx={{ color: "red" }} />
                 </Grid>
@@ -91,6 +101,18 @@ const Home = () => {
           </Grid>
         </Grid>
       </Box>
+      <Modal
+        aria-labelledby="close-modal-title"
+        open={open}
+       onClose={()=>setOpen(false)}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+       <Typography>sqwghfvwhedfgqygy</Typography>
+      </Modal>
     </>
   );
 };
