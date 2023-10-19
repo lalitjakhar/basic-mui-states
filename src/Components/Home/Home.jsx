@@ -1,7 +1,14 @@
-import { Box, Button, Container, Grid, Modal, TextField } from "@mui/material";
 import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { Typography } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -12,8 +19,29 @@ const Home = () => {
   const [open, setOpen] = useState(false);
 
   const handleAddButtonClick = () => {
-    setTodoData (inputValue);
+    setTodoData(inputValue);
   };
+
+  const handleOpenModal = () => {
+    setOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpen(false);
+  };
+
+  const [inputText, setInputText] = useState("");
+
+  const handleDiscard = () => {
+    setInputText("");
+    handleCloseModal();
+  };
+
+  const handleSave = () => {
+    console.log(`Saving: ${inputText}`);
+    handleCloseModal();
+  };
+
   return (
     <>
       <Container>
@@ -47,18 +75,12 @@ const Home = () => {
             >
               To Do
             </Typography>
-            <Box
-              sx={{
-                padding: "1rem",
-                border: "1px solid grey",
-                gap: 2,
-              }}
-            >
+            <Box sx={{ padding: "1rem", border: "1px solid grey", gap: 2 }}>
               <Grid container spacing={2}>
                 <Grid item xs={1} sx={{ display: "flex" }}>
                   <CreateIcon
                     sx={{ color: "blueviolet" }}
-                    onClick={() => setOpen(true)}
+                    onClick={handleOpenModal}
                   />
                 </Grid>
                 <Grid item xs={9}>
@@ -82,13 +104,7 @@ const Home = () => {
             >
               Completed
             </Typography>
-            <Box
-              sx={{
-                padding: "1rem",
-                border: "1px solid grey",
-                gap: 2,
-              }}
-            >
+            <Box sx={{ padding: "1rem", border: "1px solid grey", gap: 2 }}>
               <Grid container spacing={2} justifyContent="space-between">
                 <Grid item>
                   <Typography>fhfusdhfishg</Typography>
@@ -104,14 +120,37 @@ const Home = () => {
       <Modal
         aria-labelledby="close-modal-title"
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={handleCloseModal}
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <Typography>sqwghfvwhedfgqygy</Typography>
+        <Box
+          sx={{
+            width: 300,
+            p: 3,
+            bgcolor: "background.paper",
+            borderRadius: 2,
+          }}
+        >
+          <TextField
+            label="Input Text"
+            variant="outlined"
+            fullWidth
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+          />
+          <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
+            <Button onClick={handleDiscard} color="primary" sx={{ mr: 2 }}>
+              Discard
+            </Button>
+            <Button onClick={handleSave} color="primary" variant="contained">
+              Save
+            </Button>
+          </Box>
+        </Box>
       </Modal>
     </>
   );
