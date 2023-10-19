@@ -17,6 +17,7 @@ const Home = () => {
   const [inputValue, setInputValue] = useState("");
   const [todoData, setTodoData] = useState("");
   const [open, setOpen] = useState(false);
+  const [inputText, setInputText] = useState("");
 
   const handleAddButtonClick = () => {
     setTodoData(inputValue);
@@ -30,15 +31,19 @@ const Home = () => {
     setOpen(false);
   };
 
-  const [inputText, setInputText] = useState("");
 
   const handleDiscard = () => {
-    setInputText("");
+    setInputText(""); 
     handleCloseModal();
   };
 
+  const handleModalInput=(event)=>{
+    setInputText(event.target.value)
+  }
+
   const handleSave = () => {
-    console.log(`Saving: ${inputText}`);
+    console.log(inputText);
+    setTodoData(inputText)
     handleCloseModal();
   };
 
@@ -140,7 +145,7 @@ const Home = () => {
             variant="outlined"
             fullWidth
             value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
+            onChange={(e)=>{handleModalInput(e)}}
           />
           <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
             <Button onClick={handleDiscard} color="primary" sx={{ mr: 2 }}>
