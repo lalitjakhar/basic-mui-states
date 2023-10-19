@@ -5,17 +5,14 @@ import { Typography } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditTodo from "../Modal/editTodo";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
   const [todoData, setTodoData] = useState("");
   const [open, setOpen] = useState(false);
 
-
-
   const handleAddButtonClick = () => {
-    setTodoData(inputValue);
+    setTodoData (inputValue);
   };
   return (
     <>
@@ -59,7 +56,10 @@ const Home = () => {
             >
               <Grid container spacing={2}>
                 <Grid item xs={1} sx={{ display: "flex" }}>
-                  <CreateIcon sx={{ color: "blueviolet" }} onClick={()=>setOpen(true)} />
+                  <CreateIcon
+                    sx={{ color: "blueviolet" }}
+                    onClick={() => setOpen(true)}
+                  />
                 </Grid>
                 <Grid item xs={9}>
                   <Typography>{todoData}</Typography>
@@ -104,14 +104,14 @@ const Home = () => {
       <Modal
         aria-labelledby="close-modal-title"
         open={open}
-       onClose={()=>setOpen(false)}
+        onClose={() => setOpen(false)}
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-       <Typography>sqwghfvwhedfgqygy</Typography>
+        <Typography>sqwghfvwhedfgqygy</Typography>
       </Modal>
     </>
   );
