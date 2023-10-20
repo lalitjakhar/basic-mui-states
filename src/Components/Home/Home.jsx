@@ -18,6 +18,7 @@ const Home = () => {
   const [todoData, setTodoData] = useState("");
   const [open, setOpen] = useState(false);
   const [inputText, setInputText] = useState("");
+  const [completeList, setCompleteList] = useState([]);
 
   const handleAddButtonClick = () => {
     setTodoData(inputValue);
@@ -31,22 +32,24 @@ const Home = () => {
     setOpen(false);
   };
 
-
   const handleDiscard = () => {
-    setInputText(""); 
+    setInputText("");
     handleCloseModal();
   };
 
-  const handleModalInput=(event)=>{
-    setInputText(event.target.value)
-  }
+  const handleModalInput = (event) => {
+    setInputText(event.target.value);
+  };
 
   const handleSave = () => {
     console.log(inputText);
-    setTodoData(inputText)
+    setTodoData(inputText);
     handleCloseModal();
   };
-
+  const handleCompleteModal = () => {
+    setCompleteList([todoData]);
+    setTodoData("");
+  };
   return (
     <>
       <Container>
@@ -96,7 +99,10 @@ const Home = () => {
                   xs={2}
                   sx={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <CheckIcon sx={{ color: "green" }} />
+                  <CheckIcon
+                    sx={{ color: "green" }}
+                    onClick={handleCompleteModal}
+                  />
                   <DeleteIcon sx={{ color: "red" }} />
                 </Grid>
               </Grid>
@@ -112,10 +118,10 @@ const Home = () => {
             <Box sx={{ padding: "1rem", border: "1px solid grey", gap: 2 }}>
               <Grid container spacing={2} justifyContent="space-between">
                 <Grid item>
-                  <Typography>fhfusdhfishg</Typography>
+                  <Typography>{completeList}</Typography>
                 </Grid>
                 <Grid item xs={1}>
-                  <DeleteIcon sx={{ color: "red" }} />
+                  <DeleteIcon sx={{ color: "red" }}/>
                 </Grid>
               </Grid>
             </Box>
@@ -145,7 +151,9 @@ const Home = () => {
             variant="outlined"
             fullWidth
             value={inputText}
-            onChange={(e)=>{handleModalInput(e)}}
+            onChange={(e) => {
+              handleModalInput(e);
+            }}
           />
           <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
             <Button onClick={handleDiscard} color="primary" sx={{ mr: 2 }}>
